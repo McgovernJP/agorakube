@@ -347,26 +347,15 @@ metadata:
   namespace: ingress-nginx
 spec:
   type: NodePort
-{% if agorakube_features.ingress.release is version('v1.0.1', '>=') %}
-  ipFamilyPolicy: SingleStack
-  ipFamilies:
-    - IPv4
-{% endif %}
   ports:
     - name: http
       port: 80
       protocol: TCP
       targetPort: http
-{% if agorakube_features.ingress.release is version('v1.0.1', '>=') %}
-      appProtocol: http
-{% endif %}
     - name: https
       port: 443
       protocol: TCP
       targetPort: https
-{% if agorakube_features.ingress.release is version('v1.0.1', '>=') %}
-      appProtocol: https
-{% endif %}
   selector:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/instance: ingress-nginx
